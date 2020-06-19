@@ -41,30 +41,42 @@ export const fetchPost = (id) => async (dispatch) => {
     });
 };
 
-export const createPost = () => async (dispatch) => {
-  console.log("create action");
-  const response = await axios.post(`${POSTS_URL}`);
+export const createPost = (values, callback) => async (dispatch) => {
+  const request = axios.post(`${POSTS_URL}`, values).then(() => callback());
+
   dispatch({
     type: CREATE_POST,
-    payload: response.data,
+    payload: request,
   });
 };
 
-export const updatePost = (id) => async (dispatch) => {
-  console.log("update action");
-  const response = await axios.put(`${POSTS_URL}/${id}`);
+export const updatePost = (id, values, callback) => async (dispatch) => {
+  let axiosInstance = axios.create({
+    headers: {
+      put: {
+        "content-type": "application/json; charset=UTF-8",
+        body: JSON.stringify(values),
+      },
+    },
+  });
+
+  const request = axiosInstance
+    .put(`${POSTS_URL}/${id}`)
+    .then(() => callback());
+
   dispatch({
     type: UPDATE_POST,
-    payload: response.data,
+    payload: request,
   });
 };
 
 export const deletePost = (id) => async (dispatch) => {
-  console.log("delete action");
-  const response = await axios.delete(`${POSTS_URL}/${id}`);
+  const request = axiosInstance
+    .deletePost(`${POSTS_URL}/${id}`)
+    .then(() => callback());
 
   dispatch({
     type: DELETE_POST,
-    payload: response.data,
+    payload: request,
   });
 };
