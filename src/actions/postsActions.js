@@ -70,9 +70,9 @@ export const updatePost = (id, values, callback) => async (dispatch) => {
   });
 };
 
-export const deletePost = (id) => async (dispatch) => {
-  const request = axiosInstance
-    .deletePost(`${POSTS_URL}/${id}`)
+export const deletePost = (id, callback) => async (dispatch) => {
+  const request = axios
+    .delete(`${POSTS_URL}/${id}`)
     .then(() => callback());
 
   dispatch({
