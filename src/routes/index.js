@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes as ReactRoutes, Route } from "react-router-dom";
 
 import Home from "../pages/home";
 import About from "../pages/about";
@@ -9,23 +9,13 @@ import PostDetail from "../pages/posts/detail";
 
 const Routes = () => {
   return (
-    <Switch>
-      <Route path="/posts/:id">
-        <PostDetail />
-      </Route>
-      <Route path="/posts">
-        <PostList />
-      </Route>
-      <Route path="/contact">
-        <Contact />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/">
-        <Home />
-      </Route>
-    </Switch>
+    <ReactRoutes>
+      <Route path="/posts/:id" element={<PostDetail />} />
+      <Route path="/posts" element={<PostList />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/" element={<Home />} />
+    </ReactRoutes>
   );
 };
 
